@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CIS 2750 A3 Julian Lau</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A3">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="Julian Lau">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Custom CSS End -->
+</head>
+<body>
+    <h1>Welcome to my SVG Image Website!</h1>
+    
+    <!-- ===== File Log Panel ===== -->
+    <h2>File Log Panel</h2>
+    
+    <!-- File Upload -->
+	<form id="fileForm" method="POST" action="/upload">
+		<input type="file" id="uploadFile" name="uploadFile">
+		<input type="button" id="submit" name="submit" value="Submit" />
+	</form>
+    <p id="deleteMe">No files to display, upload/create one!</p>
+    <div class="scroll">
+        <table id="fileLogPanel" style="width:100%" border="2px">
+            <tr>
+                <th>Image<br/>(Click to download)</th>
+                <th>FileName<br/>(Click to download)</th>
+                <th>File Size (KB)</th>
+                <th>Number of Rectangles</th>
+                <th>Number of Circles</th>
+                <th>Number of Paths</th>
+                <th>Number of Groups</th>
+            </tr>
+            
+        </table>
+    </div>
+    
+    <hr>
+
+    <!-- ===== SVG VIEW Panel ===== -->
+    <p></p>
+    <h2>SVG View Panel</h2>
+    
+    <!-- Image Select -->
+	<label for="imageSelect">Select an Image</label>
+	<select id="imageSelect">
+		<option disabled selected value>Click to Select</option>
+	</select>
+
+    <div style="text-align:center">
+        <img id="SVGViewImage" src="" align="middle" width="800px">
+    </div>
+    
+    <div class="scroll">
+		<table width="700" border="2px">
+			<tr>
+				<th>Title</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td id="title"></td>
+				<td id="description"></td>
+			</tr>
+		</table>
+        <table id="componentTable" width="700" border="2px">
+            <tr>
+                <th>Component</th>
+                <th>Summary</th>
+                <th>Other Attributes</th>
+                <th>Show Attributes</th>
+            </tr>
+        </table>
+        <table id="attributeTable" width="700" border="2px">
+            <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+    
+    <!-- Edit Attribute -->
+    <h2>Edit Attribute</h2>
+    
+    <form id="editAttribute">
+		<label>Name:</label>
+		<input type="text" id="editName" name="editName">
+		<label>Value</label>
+		<input type="text" id="editValue" name="editValue">
+	</form>
+    
+    <hr>
+
+	<!-- Edit Title/Description -->
+	<h2>Edit Title/Description</h2>
+	
+    <button id="titleBtn" type="button">Edit Title</button>
+    <button id="descBtn" type="button">Edit Description</button>
+    <textarea id="editTextArea" maxlength="255" cols="100">Place your title/description here! (255 characters max)</textarea>
+   
+    <hr>
+    
+    <!-- Create SVG  -->
+    <h2>Create SVG</h2>
+    
+    <form id="createSVG">
+		<label>FileName (Don't include ".svg"):</label>
+		<input type="text" id="createFileName" name="createFileName" maxlength="255">
+	
+		<input type="submit" value="Create SVG">
+	</form>
+	
+	<hr>
+    
+    <!-- Select Shape  -->
+    <h2>Select Shape for Adding and Scaling</h2>
+    
+    <label for="shapeSelect">Select Shape</label>
+	<select id="shapeSelect">
+		<option disabled selected value>Click to Select</option>
+		<option value="Rectangle">Rectangle</option>
+		<option value="Circle">Circle</option>
+	</select>
+	
+	<hr>
+	
+	<!-- Add Shape -->
+    <h2>Add Shape</h2>
+    
+	<form id="addRectangle">
+		<label>x Value:</label>
+		<input type="text" id="xVal" name="xVal"><br>
+		<label>y Value:</label>
+		<input type="text" id="yVal" name="yVal"><br>
+		<label>width Value:</label>
+		<input type="text" id="wVal" name="wVal"><br>
+		<label>height Value:</label>
+		<input type="text" id="hVal" name="hVal"><br>
+		<label>units Value:</label>
+		<input type="text" id="uValRect" name="uVal"><br>
+		
+		<input type="submit" value="Add Rectangle">
+	</form>
+	
+	<form id="addCircle">
+		<label>cx Value:</label>
+		<input type="text" id="cxVal" name="cxVal"><br>
+		<label>cy Value:</label>
+		<input type="text" id="cyVal" name="cyVal"><br>
+		<label>r Value:</label>
+		<input type="text" id="rVal" name="rVal"><br>
+		<label>units Value:</label>
+		<input type="text" id="uValCirc" name="uVal"><br>
+		
+		<input type="submit" value="Add Circle">
+	</form>
+	
+	<hr>
+
+	<!-- Scape Shape -->
+	<h2>Scale Shape</h2>
+	
+	<form id="scaleShape">
+		<label>Scale Factor: </label>
+		<input type="text" id="scaleNum" name="scaleNum">
+	
+		<input type="submit" value="Scale Shape">
+	</form>
+	
+    <!-- Leave me at the bottom of body -->
+    <script src="/index.js"></script>
+</body>
+</html>
